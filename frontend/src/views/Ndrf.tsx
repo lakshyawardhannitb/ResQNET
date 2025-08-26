@@ -5,7 +5,7 @@ function Ndrf() {
   const [isConnected, setIsConnected] = useState(false)
   const [filter, setFilter] = useState('')
 
-  const API_URL = 'http://localhost:3001'
+  const API_URL = '/api'
 
   const fetchMessages = async () => {
     try {
@@ -14,6 +14,8 @@ function Ndrf() {
         const data = await response.json()
         setMessages(data)
         setIsConnected(true)
+      } else {
+        setIsConnected(false)
       }
     } catch (error) {
       console.error('Failed to fetch messages:', error)
@@ -75,7 +77,7 @@ function Ndrf() {
                   <div key={index} className="bg-gray-700 p-3 rounded-lg text-sm">
                     <p>{message}</p>
                   </div>
-                ))
+                ))}
               )}
             </div>
           </div>
@@ -100,7 +102,7 @@ function Ndrf() {
               </button>
             </div>
             <div className="mt-6 text-gray-400 text-sm">
-              <p>Backend API: {API_URL} (GET /messages, POST /send)</p>
+              <p>Backend API: proxied via /api → http://localhost:3001 (GET /messages, POST /send)</p>
             </div>
           </div>
         </div>
