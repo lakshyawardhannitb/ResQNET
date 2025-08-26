@@ -5,7 +5,7 @@ function Victim() {
   const [newMessage, setNewMessage] = useState('')
   const [isConnected, setIsConnected] = useState(false)
 
-  const API_URL = 'http://localhost:3001'
+  const API_URL = '/api'
 
   const fetchMessages = async () => {
     try {
@@ -14,6 +14,8 @@ function Victim() {
         const data = await response.json()
         setMessages(data)
         setIsConnected(true)
+      } else {
+        setIsConnected(false)
       }
     } catch (error) {
       console.error('Failed to fetch messages:', error)
@@ -42,8 +44,9 @@ function Victim() {
     }
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
+      e.preventDefault()
       sendMessage()
     }
   }
@@ -92,7 +95,7 @@ function Victim() {
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="Type your emergency message here..."
               className="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-red-500 focus:outline-none"
               disabled={!isConnected}
@@ -108,7 +111,7 @@ function Victim() {
         </div>
 
         <div className="mt-8 text-center text-gray-500 text-sm">
-          <p>Backend API: {API_URL}</p>
+          <p>Backend API: proxied via /api → http://localhost:3001</p>
           <p>Endpoints: GET /messages, POST /send</p>
         </div>
       </div>

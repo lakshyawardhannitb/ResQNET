@@ -12,7 +12,7 @@ function App() {
             <div className="flex items-center gap-4 text-sm">
               <Link className="hover:text-red-400" to="/victim">Victim UI</Link>
               <Link className="hover:text-yellow-400" to="/ndrf">NDRF UI</Link>
-              <a className="text-gray-400" href="https://localhost:3001" target="_blank" rel="noreferrer">API</a>
+              <a className="text-gray-400" href="http://localhost:3001/messages" target="_blank" rel="noreferrer">API</a>
             </div>
           </div>
         </nav>
