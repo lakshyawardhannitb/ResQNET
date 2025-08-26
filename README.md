@@ -43,6 +43,41 @@ Brief explanation about MDNS
  - Code can be found inside /frontend folder.
  ![frontend](ui.png)
 
+## Frontend UIs (Victim and NDRF)
+
+- The backend HTTP API runs at `http://localhost:3001` with:
+  - GET `/messages`: returns array of message strings
+  - POST `/send`: JSON body `{ "message": string }`
+- Two React UIs are available from the same Vite app and both talk to the same backend:
+  - Victim UI route: `/victim`
+  - NDRF UI route: `/ndrf`
+
+### Run frontend (single app with routes)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open the Vite URL shown in the terminal, then navigate to:
+- Victim UI: `/victim`
+- NDRF UI: `/ndrf`
+
+To build for production:
+```bash
+npm run build
+```
+
+### Start backend (single node exposing API)
+
+Ensure one node is started with the HTTP server enabled (exposes `/messages` and `/send`):
+```bash
+cd cmd/disasternet
+go run main.go --port 9000 --same_string xyz --room myroom --nick Abhi --enable-http true
+```
+Start additional peers without `--enable-http` as needed on the same LAN.
+
 ## Commands to run on your local system.
 
 ### Steps to start frontend
